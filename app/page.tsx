@@ -1,4 +1,4 @@
-import VernierSim from '@/components/VernierSim'
+import VernierSim from '@/components/VernierSim';
 
 export default function Page() {
   return (
@@ -6,5 +6,5 @@ export default function Page() {
       <h1 className="text-2xl font-semibold">VernierSim</h1>
       <VernierSim />
     </main>
-  )
+  );
 }
