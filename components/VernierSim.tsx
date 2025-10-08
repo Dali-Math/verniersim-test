@@ -1,3 +1,7 @@
 export default function VernierSim() {
-  return <div>VernierSim Ready</div>;
+  return (
+    <div>
+      <h1>VernierSim Ready</h1>
+    </div>
+  );
 }
