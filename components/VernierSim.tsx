@@ -69,14 +69,65 @@ export default function VernierSim() {
   const measurement = (vernierPosition / 50 * 10).toFixed(1);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 space-y-6">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+    <div className="w-full max-w-4xl mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
+      <div className="bg-white rounded-lg shadow-lg p-4 md:p-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-6 text-gray-800">
           Simulateur de Vernier
         </h1>
         
+        {/* Boutons de mode */}
+        <div className="flex flex-wrap gap-2 justify-center mb-4">
+          <button
+            onClick={() => setMode('1/10')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+              mode === '1/10'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            Mode 1/10 (0.1 mm)
+          </button>
+          <button
+            onClick={() => setMode('1/20')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+              mode === '1/20'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            Mode 1/20 (0.05 mm)
+          </button>
+          <button
+            onClick={() => setMode('1/50')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+              mode === '1/50'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            Mode 1/50 (0.02 mm)
+          </button>
+        </div>
+
+        {/* Contrôles de zoom */}
+        <div className="flex items-center justify-center gap-4 mb-4">
+          <button
+            onClick={() => setZoom(Math.max(0.5, zoom - 0.1))}
+            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold"
+          >
+            🔍-
+          </button>
+          <span className="font-semibold text-gray-700">Zoom: {(zoom * 100).toFixed(0)}%</span>
+          <button
+            onClick={() => setZoom(Math.min(2, zoom + 0.1))}
+            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold"
+          >
+            🔍+
+          </button>
+        </div>
+        
         {/* Conteneur SVG pour le vernier */}
-        <div className="border-2 border-gray-300 rounded-lg p-4 bg-gray-50 overflow-x-auto">
+        <div className="border-2 border-gray-300 rounded-lg p-2 md:p-4 bg-gray-50 overflow-x-auto">
           <svg
             viewBox="0 0 800 200"
             className="w-full h-auto"
@@ -197,13 +248,13 @@ export default function VernierSim() {
 
         {/* Info de mesure */}
         <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-          <p className="text-lg font-semibold text-gray-800">
+          <p className="text-base md:text-lg font-semibold text-gray-800">
             Mode actuel : <span className="text-blue-600">{mode}</span>
           </p>
           <p className="text-sm text-gray-600 mt-1">
             Précision : {config.precision} mm
           </p>
-          <p className="text-xl font-bold text-gray-900 mt-2">
+          <p className="text-lg md:text-xl font-bold text-gray-900 mt-2">
             Mesure : <span className="text-green-600">{measurement} mm</span>
           </p>
         </div>
